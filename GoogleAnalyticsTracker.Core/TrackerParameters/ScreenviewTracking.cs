@@ -18,40 +18,5 @@ namespace GoogleAnalyticsTracker.Core.TrackerParameters
 
         #endregion
 
-        #region Implementation of IAppTrackingParameters
-
-        /// <summary>
-        /// Specifies the application name.
-        /// <remarks>Optional</remarks>
-        /// <example>My App</example>
-        /// </summary>
-        [Beacon("an")]
-        public string ApplicationName { get; set; }
-
-        /// <summary>
-        /// Application identifier.
-        /// <remarks>Optional</remarks>
-        /// <example>com.company.app</example>
-        /// </summary>
-        [Beacon("aid")]
-        public string ApplicationId { get; set; }
-
-        /// <summary>
-        /// Specifies the application version.
-        /// <remarks>Optional</remarks>
-        /// <example>1.2</example>
-        /// </summary>
-        [Beacon("av")]
-        public string ApplicationVersion { get; set; }
-
-        /// <summary>
-        /// Application installer identifier.
-        /// <remarks>Optional</remarks>
-        /// <example>com.platform.vending</example>
-        /// </summary>
-        [Beacon("aiid")]
-        public string ApplicationInstallerId { get; set; }
-
-        #endregion
     }
 }

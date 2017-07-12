@@ -344,69 +344,148 @@ namespace GoogleAnalyticsTracker.Core.TrackerParameters
                 //max length of 150 bytes for custom dimensions
                 if (value.Length > 149) value = value.Substring(0, 149);
 
-                if (dimension.Key == 1) CustomDimension1 = value;
-                else if (dimension.Key == 2) CustomDimension2 = value;
-                else if (dimension.Key == 3) CustomDimension3 = value;
-                else if (dimension.Key == 4) CustomDimension4 = value;
-                else if (dimension.Key == 5) CustomDimension5 = value;
-                else if (dimension.Key == 6) CustomDimension6 = value;
-                else if (dimension.Key == 7) CustomDimension7 = value;
-                else if (dimension.Key == 8) CustomDimension8 = value;
-                else if (dimension.Key == 9) CustomDimension9 = value;
-                else if (dimension.Key == 10) CustomDimension10 = value;
-                else if (dimension.Key == 11) CustomDimension11 = value;
-                else if (dimension.Key == 12) CustomDimension12 = value;
-                else if (dimension.Key == 13) CustomDimension13 = value;
-                else if (dimension.Key == 14) CustomDimension14 = value;
-                else if (dimension.Key == 15) CustomDimension15 = value;
-                else if (dimension.Key == 16) CustomDimension16 = value;
-                else if (dimension.Key == 17) CustomDimension17 = value;
-                else if (dimension.Key == 18) CustomDimension18 = value;
-                else if (dimension.Key == 19) CustomDimension19 = value;
-                else if (dimension.Key == 20) CustomDimension20 = value;
+                if (dimension.Key == 1) CustomDimensions1 = value;
+                else if (dimension.Key == 2) CustomDimensions2 = value;
+                else if (dimension.Key == 3) CustomDimensions3 = value;
+                else if (dimension.Key == 4) CustomDimensions4 = value;
+                else if (dimension.Key == 5) CustomDimensions5 = value;
+                else if (dimension.Key == 6) CustomDimensions6 = value;
+                else if (dimension.Key == 7) CustomDimensions7 = value;
+                else if (dimension.Key == 8) CustomDimensions8 = value;
+                else if (dimension.Key == 9) CustomDimensions9 = value;
+                else if (dimension.Key == 10) CustomDimensions10 = value;
+                else if (dimension.Key == 11) CustomDimensions11 = value;
+                else if (dimension.Key == 12) CustomDimensions12 = value;
+                else if (dimension.Key == 13) CustomDimensions13 = value;
+                else if (dimension.Key == 14) CustomDimensions14 = value;
+                else if (dimension.Key == 15) CustomDimensions15 = value;
+                else if (dimension.Key == 16) CustomDimensions16 = value;
+                else if (dimension.Key == 17) CustomDimensions17 = value;
+                else if (dimension.Key == 18) CustomDimensions18 = value;
+                else if (dimension.Key == 19) CustomDimensions19 = value;
+                else if (dimension.Key == 20) CustomDimensions20 = value;
             }
         }
 
+
+        #region Implementation of IAppTrackingParameters
+
+        /// <summary>
+        /// Specifies the application name.
+        /// <remarks>Optional</remarks>
+        /// <example>My App</example>
+        /// </summary>
+        [Beacon("an")]
+        public string ApplicationName { get; set; }
+
+        /// <summary>
+        /// Application identifier.
+        /// <remarks>Optional</remarks>
+        /// <example>com.company.app</example>
+        /// </summary>
+        [Beacon("aid")]
+        public string ApplicationId { get; set; }
+
+        /// <summary>
+        /// Specifies the application version.
+        /// <remarks>Optional</remarks>
+        /// <example>1.2</example>
+        /// </summary>
+        [Beacon("av")]
+        public string ApplicationVersion { get; set; }
+
+        /// <summary>
+        /// Application installer identifier.
+        /// <remarks>Optional</remarks>
+        /// <example>com.platform.vending</example>
+        /// </summary>
+        [Beacon("aiid")]
+        public string ApplicationInstallerId { get; set; }
+
+        #endregion
+
+
         [Beacon("cd1")]
-        public string CustomDimension1 { get; set; }
+        public string CustomDimensions1 { get; set; }
         [Beacon("cd2")]
-        public string CustomDimension2 { get; set; }
+        public string CustomDimensions2 { get; set; }
         [Beacon("cd3")]
-        public string CustomDimension3 { get; set; }
+        public string CustomDimensions3 { get; set; }
         [Beacon("cd4")]
-        public string CustomDimension4 { get; set; }
+        public string CustomDimensions4 { get; set; }
         [Beacon("cd5")]
-        public string CustomDimension5 { get; set; }
+        public string CustomDimensions5 { get; set; }
         [Beacon("cd6")]
-        public string CustomDimension6 { get; set; }
+        public string CustomDimensions6 { get; set; }
         [Beacon("cd7")]
-        public string CustomDimension7 { get; set; }
+        public string CustomDimensions7 { get; set; }
         [Beacon("cd8")]
-        public string CustomDimension8 { get; set; }
+        public string CustomDimensions8 { get; set; }
         [Beacon("cd9")]
-        public string CustomDimension9 { get; set; }
+        public string CustomDimensions9 { get; set; }
         [Beacon("cd10")]
-        public string CustomDimension10 { get; set; }
+        public string CustomDimensions10 { get; set; }
         [Beacon("cd11")]
-        public string CustomDimension11 { get; set; }
+        public string CustomDimensions11 { get; set; }
         [Beacon("cd12")]
-        public string CustomDimension12 { get; set; }
+        public string CustomDimensions12 { get; set; }
         [Beacon("cd13")]
-        public string CustomDimension13 { get; set; }
+        public string CustomDimensions13 { get; set; }
         [Beacon("cd14")]
-        public string CustomDimension14 { get; set; }
+        public string CustomDimensions14 { get; set; }
         [Beacon("cd15")]
-        public string CustomDimension15 { get; set; }
+        public string CustomDimensions15 { get; set; }
         [Beacon("cd16")]
-        public string CustomDimension16 { get; set; }
+        public string CustomDimensions16 { get; set; }
         [Beacon("cd17")]
-        public string CustomDimension17 { get; set; }
+        public string CustomDimensions17 { get; set; }
         [Beacon("cd18")]
-        public string CustomDimension18 { get; set; }
+        public string CustomDimensions18 { get; set; }
         [Beacon("cd19")]
-        public string CustomDimension19 { get; set; }
+        public string CustomDimensions19 { get; set; }
         [Beacon("cd20")]
-        public string CustomDimension20 { get; set; }
+        public string CustomDimensions20 { get; set; }
+
+        [Beacon("cm1")]
+        public string CustomMetric1 { get; set; }
+        [Beacon("cm2")]
+        public string CustomMetric2 { get; set; }
+        [Beacon("cm3")]
+        public string CustomMetric3 { get; set; }
+        [Beacon("cm4")]
+        public string CustomMetric4 { get; set; }
+        [Beacon("cm5")]
+        public string CustomMetric5 { get; set; }
+        [Beacon("cm6")]
+        public string CustomMetric6 { get; set; }
+        [Beacon("cm7")]
+        public string CustomMetric7 { get; set; }
+        [Beacon("cm8")]
+        public string CustomMetric8 { get; set; }
+        [Beacon("cm9")]
+        public string CustomMetric9 { get; set; }
+        [Beacon("cm10")]
+        public string CustomMetric10 { get; set; }
+        [Beacon("cm11")]
+        public string CustomMetric11 { get; set; }
+        [Beacon("cm12")]
+        public string CustomMetric12 { get; set; }
+        [Beacon("cm13")]
+        public string CustomMetric13 { get; set; }
+        [Beacon("cm14")]
+        public string CustomMetric14 { get; set; }
+        [Beacon("cm15")]
+        public string CustomMetric15 { get; set; }
+        [Beacon("cm16")]
+        public string CustomMetric16 { get; set; }
+        [Beacon("cm17")]
+        public string CustomMetric17 { get; set; }
+        [Beacon("cm18")]
+        public string CustomMetric18 { get; set; }
+        [Beacon("cm19")]
+        public string CustomMetric19 { get; set; }
+        [Beacon("cm20")]
+        public string CustomMetric20 { get; set; }
         #endregion
     }
 }
