@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GoogleAnalyticsTracker.Core.Interface;
 
 namespace GoogleAnalyticsTracker.Core
-{    
+{
     public partial class TrackerBase : IDisposable
     {
         public const string TrackingAccountConfigurationKey = "GoogleAnalyticsTracker.TrackingAccount";
         public const string TrackingDomainConfigurationKey = "GoogleAnalyticsTracker.TrackingDomain";
 
         const string BeaconUrl = "http://www.google-analytics.com/collect";
-        const string BeaconUrlSsl = "https://ssl.google-analytics.com/collect";        
+        const string BeaconUrlSsl = "https://ssl.google-analytics.com/collect";
 
         public string TrackingAccount { get; set; }
         public string TrackingDomain { get; set; }
@@ -22,10 +24,12 @@ namespace GoogleAnalyticsTracker.Core
         public string Hostname { get; set; }
         public string Language { get; set; }
         public string UserAgent { get; set; }
-        public string CharacterSet { get; set; }        
+        public string CharacterSet { get; set; }
 
-        public bool ThrowOnErrors { get; set; }        
+        public bool ThrowOnErrors { get; set; }
         public bool UseSsl { get; set; }
+
+        private static HttpClient _httpClient = new HttpClient();
 
         public TrackerBase(string trackingAccount, string trackingDomain, ITrackerEnvironment trackerEnvironment)
             : this(trackingAccount, trackingDomain, new AnalyticsSession(), trackerEnvironment)
@@ -42,7 +46,7 @@ namespace GoogleAnalyticsTracker.Core
             Language = "en";
             UserAgent = string.Format("GoogleAnalyticsTracker/3.0 ({0}; {1}; {2})", trackerEnvironment.OsPlatform, trackerEnvironment.OsVersion, trackerEnvironment.OsVersionString);
 
-            InitializeCharset();                  
+            InitializeCharset();
         }
 
         private void InitializeCharset()
@@ -74,34 +78,34 @@ namespace GoogleAnalyticsTracker.Core
             }
 
             // Create request
-            HttpWebRequest request;
+            HttpRequestMessage requestMessage;
             try
             {
-                request = (HttpWebRequest)WebRequest.Create(string.Format("{0}?{1}", url, data));                
-                request.SetHeader("Referer", referer);
-                request.SetHeader("User-Agent", userAgent ?? UserAgent);
+                requestMessage = new HttpRequestMessage(HttpMethod.Get, string.Format("{0}?{1}", url, data));
+                requestMessage.Headers.Add("Referer", referer);
+                requestMessage.Headers.Add("User-Agent", userAgent ?? UserAgent);
             }
             catch (Exception ex)
             {
-                if (ThrowOnErrors)                
-                    throw;                
-                
+                if (ThrowOnErrors)
+                    throw;
+
                 returnValue.Success = false;
                 returnValue.Exception = ex;
                 return returnValue;
             }
 
             // Perform request
-            WebResponse response = null;
+            HttpResponseMessage response = null;
             try
             {
-                response = await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
+                response = await _httpClient.SendAsync(requestMessage);
                 returnValue.Success = true;
             }
             catch (Exception ex)
             {
-                if (ThrowOnErrors)                
-                    throw;                
+                if (ThrowOnErrors)
+                    throw;
                 else
                 {
                     returnValue.Success = false;
@@ -110,8 +114,8 @@ namespace GoogleAnalyticsTracker.Core
             }
             finally
             {
-                if (response != null)                
-                    response.Dispose();                
+                if (response != null)
+                    response.Dispose();
             }
 
             return returnValue;
